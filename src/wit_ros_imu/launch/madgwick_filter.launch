@@ -1,0 +1,16 @@
+<launch>
+
+    # Nodelet Manager
+    <node pkg="nodelet" type="nodelet" name="imu_manager" args="manager" output="screen">
+        <remap from="imu/data_raw" to="/wit/imu"/>
+        <remap from="imu/data" to="/wit/imu_filtered"/>
+    </node>
+
+    # IMU Driver
+    <node pkg="nodelet" type="nodelet" name="imuFilterNodelet" args="load imu_filter_madgwick/ImuFilterNodelet imu_manager" output="screen">
+        <param name="use_mag" value="false"/>
+        <param name="world_frame" value="enu"/>
+        <param name="publish_tf" value="false"/>
+    </node>
+
+</launch>

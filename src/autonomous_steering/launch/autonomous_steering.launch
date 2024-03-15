@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<launch>
+
+    <arg name="source" default="0" />
+    <arg name="fps" default="30" />
+    <arg name="width" default="640"/>
+    <arg name="height" default="480"/>
+    <arg name="vis" default="false"/>
+
+    <include file="$(find autonomous_steering)/launch/camera_stream.launch">
+        <arg name="source" value="$(arg source)" />
+        <arg name="fps" value="$(arg fps)" />
+        <arg name="width" value="$(arg width)"/>
+        <arg name="height" value="$(arg height)"/>
+        <arg name="vis" value="$(arg vis)"/>
+    </include>
+<!--     
+    <node pkg="autonomous_steering" type="frame_subscriber.py" name="autonomous_steering" output="screen"  >
+        <param name="img_topic" value="/camera/image_raw/compressed"/>
+        <param name="camera_calibration_dir" type="String" value="$(find autonomous_steering)/camera_cal"/>
+        <param name="video_source" type="String" value="$(find autonomous_steering)/demo_videos/project_video.mp4"/>
+        <param name="mode" value="live"/>
+    </node> -->
+
+    <node pkg="camera_stream" type="depth_estimation_subscriber.py" name="depth_estimation_subscriber" output="screen" />
+	<node pkg="camera_stream" type="control_mux.py" name="control_mux" output="screen" />
+	
+</launch>

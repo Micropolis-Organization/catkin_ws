@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="source" default="0" />
+    <arg name="fps" default="30" />
+    <arg name="width" default="640"/>
+    <arg name="height" default="480"/>
+    <arg name="vis" default="false"/>
+
+    <!-- launch video stream -->
+    <include file="$(find video_stream_opencv)/launch/camera.launch">
+        <!-- node name and ros graph name -->
+        <arg name="camera_name" value="camera" />
+        <!-- means video device 0, /dev/video0 -->
+        <arg name="video_stream_provider" value="$(arg source)" />
+        <!-- set camera fps to (if the device allows) -->
+        <arg name="set_camera_fps" value="$(arg fps)" />
+        <!-- set buffer queue size of frame capturing to (1 means we want the latest frame only) -->
+        <arg name="buffer_queue_size" value="1" />
+        <!-- throttling the querying of frames to -->
+        <arg name="fps" value="$(arg fps)" />
+        <!-- setting frame_id -->
+        <arg name="frame_id" value="optical_frame" />
+        <!-- camera info loading, take care as it needs the "file:///" at the start , e.g.:
+	  	"file:///$(find your_camera_package)/config/your_camera.yaml" -->
+        <arg name="camera_info_url" value="" />
+        <!-- flip the image horizontally (mirror it) -->
+        <arg name="flip_horizontal" value="false" />
+        <!-- flip the image vertically -->
+        <arg name="flip_vertical" value="false" />
+        <!-- force width and height, 0 means no forcing -->
+        
+	    <arg name="width" value="$(arg width)"/>
+	    <arg name="height" value="$(arg height)"/>
+		
+        <!-- visualize on an image_view window the stream generated -->
+        <arg name="visualize" value="$(arg vis)" />
+    </include>
+</launch>
