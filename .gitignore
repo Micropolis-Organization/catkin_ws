@@ -1,0 +1,10 @@
+devel/
+build/
+*.zip
+.vscode
+.catkin_workspace
+*.mp4
+*.avi
+*.pt
+*.pth
+*.onnx
