@@ -1,9 +1,18 @@
 <?xml version="1.0"?>
 <launch>
     <arg name="port" default="/dev/ttyUSB1" />
+    <arg name="gui" default="no"/>
 
-    <node name="can_node" pkg="can_pkg" type="can_node"  output="screen" >
+    <node name="can_node" pkg="can_pkg" type="can_node" output="screen">
         <param name="port" value="$(arg port)"/>
     </node>
 
+    <node pkg="can_pkg" type="ros_slider_publisher.py" name="ros_slider" 
+      if="$(eval arg('gui') == 'yes')"/>
+
 </launch>
+<!-- use this command to launch the slider -->
+<!-- roslaunch can_pkg can_pkg.launch gui:=yes -->
+
+<!-- use this command to set the usb port -->
+<!-- roslaunch can_pkg can_pkg.launch port:=/dev/ttyUSB1 -->
