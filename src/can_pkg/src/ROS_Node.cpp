@@ -11,15 +11,15 @@ ROS_Node::ROS_Node(/* args */)
    this->steering_sub = this->_nh->subscribe<std_msgs::Float32>("steering_rad", 1, [&](const std_msgs::Float32::ConstPtr &steeringMsg)
                                                                 { this->_steering = steeringMsg->data;
                                                                 std::cout<<"steering: " <<this->_steering<<std::endl; });
-   
-   this->getRosParam("/can_node/port", this->_USB_PORT);
 
+   this->getRosParam("/can_node/port", this->_USB_PORT);
    can_interface = new CAN_Interface((char *)this->_USB_PORT.c_str());
+   ROS_INFO("[RosNode] ready to start");
 }
 
 void ROS_Node::update()
 {
-   // can_interface->update_loop(this->_velocity, this->_steering);
+   can_interface->update_loop(this->_velocity, this->_steering);
 }
 
 void ROS_Node::getRosParam(std::string paramName, auto &paramValue)
@@ -29,11 +29,11 @@ void ROS_Node::getRosParam(std::string paramName, auto &paramValue)
       std::stringstream strg;
       strg << paramValue;
       std::string s = strg.str();
-      ROS_INFO("[IWebotsRosNode] [PARAM] %s = %s", paramName.c_str(), s.c_str());
+      ROS_INFO("[RosNode] [PARAM] %s = %s", paramName.c_str(), s.c_str());
    }
    else
    {
-      ROS_WARN("[IWebotsRosNode] [PARAM] %s is not set", paramName.c_str());
+      ROS_WARN("[RosNode] [PARAM] %s is not set", paramName.c_str());
    }
 }
 

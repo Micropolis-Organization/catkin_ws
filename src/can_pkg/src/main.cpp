@@ -7,7 +7,7 @@ int main(int argc, char **argv)
 
   while (ros::ok())
   {
-    /* code */
+    
     ros_node.update();
     ros::spinOnce();
   }

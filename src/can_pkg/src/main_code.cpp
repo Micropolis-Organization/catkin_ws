@@ -1,11 +1,11 @@
 #include "definitions.hpp"
 
-// #define CANUSB_INJECT_SLEEP_GAP_DEFAULT 200 /* ms */
-// #define CANUSB_TTY_BAUD_RATE_DEFAULT 2000000
+#define CANUSB_INJECT_SLEEP_GAP_DEFAULT 200 /* ms */
+#define CANUSB_TTY_BAUD_RATE_DEFAULT 2000000
 
-// char USB_PORT[] = "/dev/ttyUSB1";
-// #define CAN_BUS_SPEED 1000000
-// char CAN_IDENTIFER[3] = "5";
+char USB_PORT[] = "/dev/ttyUSB1";
+#define CAN_BUS_SPEED 1000000
+char CAN_IDENTIFER[3] = "5";
 
 typedef enum
 {
@@ -539,16 +539,16 @@ float prev_velocity = 50,
 int main(int argc, char **argv)
 {
 
-//   ros::init(argc, argv, "CAN_node");
-//   ros::NodeHandle n;
+  ros::init(argc, argv, "CAN_node");
+  ros::NodeHandle n;
 
-//   ros::Subscriber velocity_sub = n.subscribe<std_msgs::Float32>("velocity", 1, [&](const std_msgs::Float32::ConstPtr &velocityMsg)
-//                                                                 { velocity = velocityMsg->data; 
-//                                                                   std::cout<<"velocity: " <<velocity<<std::endl; });
+  ros::Subscriber velocity_sub = n.subscribe<std_msgs::Float32>("velocity", 1, [&](const std_msgs::Float32::ConstPtr &velocityMsg)
+                                                                { velocity = velocityMsg->data; 
+                                                                  std::cout<<"velocity: " <<velocity<<std::endl; });
 
-//   ros::Subscriber steering_sub = n.subscribe<std_msgs::Float32>("steering_rad", 1, [&](const std_msgs::Float32::ConstPtr &steeringMsg)
-//                                                                 { steering = steeringMsg->data;
-//                                                                 std::cout<<"steering: " <<steering<<std::endl; });
+  ros::Subscriber steering_sub = n.subscribe<std_msgs::Float32>("steering_rad", 1, [&](const std_msgs::Float32::ConstPtr &steeringMsg)
+                                                                { steering = steeringMsg->data;
+                                                                std::cout<<"steering: " <<steering<<std::endl; });
 //   ros::Rate loop_rate(10);
 
   int c, tty_fd;
@@ -614,7 +614,7 @@ int main(int argc, char **argv)
       prev_velocity = velocity;
     }
 
-   //  ros::spinOnce();
+    ros::spinOnce();
   }
 
   return 0;
