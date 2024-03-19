@@ -1,0 +1,3 @@
+[submodule "src/can_pkg"]
+	path = src/can_pkg
+	url = git@github.com:Micropolis-Organization/can_pkg.git
