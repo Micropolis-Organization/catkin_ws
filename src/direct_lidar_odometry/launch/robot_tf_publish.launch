@@ -1,0 +1,8 @@
+<launch>
+	<param name="robot_description" textfile="$(find ackerman_pkg)/urdf/m2_test.urdf" />
+	<!-- robot_state_publisher -->
+	<node pkg="robot_state_publisher" type="robot_state_publisher" name="m2d_state_publisher" respawn="true" respawn_delay="3" />
+	<!-- joint_state_publisher -->
+	<node pkg="joint_state_publisher" type="joint_state_publisher" name="m2d_joint_state_publisher" respawn="true" respawn_delay="3" />
+
+</launch>
