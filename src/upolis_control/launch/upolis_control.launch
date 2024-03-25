@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<launch>
+
+    <node pkg="upolis_control" type="ros_node.py" name="ros_node" output="screen"  /> 
+    <node pkg="upolis_control" type="upolis_control_node" name="upolis_control" output="screen"  >
+        <param name="enable_plotter" value="False"/>
+        <param name="odom_topic" value="/dlo/odom_node/odom"/>
+        <param name="waypoints_file" type="String" value="$(find upolis_control)/data/w_new_mpolis-long-pass.csv"/>
+    </node>
+
+</launch>
